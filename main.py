@@ -3,8 +3,9 @@ import datetime
 import json
 from sqlite3 import OperationalError
 from urllib import request
+from twython import Twython
 
-from db import get_ids, insert_id, create_table_show_hn
+from db import get_ids, insert_id, create_table_show_hn, write_logs
 
 showhn_api = "http://hn.algolia.com/api/v1/search?tags=show_hn&numericFilters=points%3E25,created_at_i%3E{}&page={}"
 
@@ -30,8 +31,11 @@ def get_posts(url, result={"hits":True}, data=[]):
         num = num + 1
     return [result, data]
 
-def tweet_now(data):
-    pass
+def tweet_now(post_item):
+    title = post_item["title"]
+    url = post_item["url"]
+    if url and url.startswith('http'):
+        print(title, url, "\n")
 
 def get_items_and_post(db_data=[]):
     error, data = get_posts(showhn_api)
@@ -40,8 +44,8 @@ def get_items_and_post(db_data=[]):
             if item["objectID"] not in db_data:
                 tweet_now(item)
                 insert_id(str(item["objectID"]))
-    except Exception as e:
-        print(e)
+    except KeyError:
+        write_logs(error)
 
 
 if __name__ == "__main__":
