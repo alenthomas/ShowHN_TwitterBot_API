@@ -5,9 +5,16 @@ from sqlite3 import OperationalError
 from urllib import request
 from twython import Twython
 
+from secrets import API_KEY, API_SECRET, ACCESS_SECRET, ACCESS_TOKEN
 from db import get_ids, insert_id, create_table_show_hn, write_logs
 
 showhn_api = "http://hn.algolia.com/api/v1/search?tags=show_hn&numericFilters=points%3E25,created_at_i%3E{}&page={}"
+
+twitter = Twython(API_KEY, API_SECRET, ACCESS_TOKEN, ACCESS_SECRET)
+tweet = """{}
+{}
+#ShowHN
+#TweetFromBot"""
 
 def get_date():
     today = datetime.datetime.today()
@@ -35,7 +42,9 @@ def tweet_now(post_item):
     title = post_item["title"]
     url = post_item["url"]
     if url and url.startswith('http'):
+        data = tweet.format(title, url)
         print(title, url, "\n")
+        twitter.update_status(status=data)
 
 def get_items_and_post(db_data=[]):
     error, data = get_posts(showhn_api)
