@@ -4,6 +4,7 @@ import json
 from sqlite3 import OperationalError
 from urllib import request
 from twython import Twython
+from twython.exceptions import TwythonError
 
 from secrets import API_KEY, API_SECRET, ACCESS_SECRET, ACCESS_TOKEN
 from db import get_ids, insert_id, create_table_show_hn, write_logs
@@ -55,6 +56,8 @@ def get_items_and_post(db_data=[]):
                 insert_id(str(item["objectID"]))
     except KeyError:
         write_logs(error)
+    except TwythonError as twy:
+        write_logs(twy)
 
 
 if __name__ == "__main__":
