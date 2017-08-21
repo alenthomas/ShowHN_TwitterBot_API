@@ -22,3 +22,8 @@ def create_table_show_hn():
     cur.execute("""CREATE TABLE show_hn (objectid varchar(20) UNIQUE NOT NULL)""")
     conn.commit()
     conn.close()
+
+def write_logs(msg):
+    import datetime
+    with open("error.log", "a") as f:
+        f.write("{}--{}\n".format(msg, str(datetime.datetime.now())))
