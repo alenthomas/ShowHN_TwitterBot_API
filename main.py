@@ -1,7 +1,10 @@
 import time
 import datetime
 import json
+from sqlite3 import OperationalError
 from urllib import request
+
+from db import get_ids, insert_id, create_table_show_hn
 
 showhn_api = "http://hn.algolia.com/api/v1/search?tags=show_hn&numericFilters=points%3E25,created_at_i%3E{}&page={}"
 
@@ -27,7 +30,25 @@ def get_posts(url, result={"hits":True}, data=[]):
         num = num + 1
     return [result, data]
 
+def tweet_now(data):
+    pass
+
+def get_items_and_post(db_data=[]):
+    error, data = get_posts(showhn_api)
+    try:
+        for item in data:
+            if item["objectID"] not in db_data:
+                tweet_now(item)
+                insert_id(str(item["objectID"]))
+    except Exception as e:
+        print(e)
+
 
 if __name__ == "__main__":
-    err, data = get_posts(showhn_api)
-    print(data)
+    db_data = []
+    try:
+        db_data = get_ids()
+        get_items_and_post(db_data)
+    except OperationalError:
+        create_table_show_hn()
+        get_items_and_post()
