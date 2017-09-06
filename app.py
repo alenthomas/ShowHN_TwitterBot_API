@@ -1,6 +1,7 @@
 import server
+from content import index_html
 def index(request, response):
-    return server.send_html_handler(request, response, "Index Page")
+    return server.send_html_handler(request, response, index_html)
 
 # server functions
 
