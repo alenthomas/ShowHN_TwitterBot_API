@@ -3,15 +3,11 @@ import datetime
 import json
 from sqlite3 import OperationalError
 from urllib import request
-#from twython import Twython
-#from twython.exceptions import TwythonError
 
-#from secrets import API_KEY, API_SECRET, ACCESS_SECRET, ACCESS_TOKEN
 from db import get_ids, insert_id, create_table_show_hn, write_logs
 
 showhn_api = "http://hn.algolia.com/api/v1/search?tags=show_hn&numericFilters=points%3E25,created_at_i%3E{}&page={}"
 
-#twitter = Twython(API_KEY, API_SECRET, ACCESS_TOKEN, ACCESS_SECRET)
 tweet = """{}
 {}
 #ShowHN
@@ -44,21 +40,18 @@ def tweet_now(post_item):
     url = post_item["url"]
     if url and url.startswith('http'): # only post tweets with a http link
         data = tweet.format(title, url)
-        print(title, url, "\n")
-        #twitter.update_status(status=data)
+        #print(title, url, "\n")
+        print(data)
 
 def get_items_and_post(db_data=[]):
     error, data = get_posts(showhn_api)
     try:
         for item in data:
             if item["objectID"] not in db_data:
-                #tweet_now(item)
+                # item is the final content to post
                 insert_id(str(item["objectID"]))
     except KeyError:
         write_logs(error)
-    # except TwythonError as twy:
-    #     write_logs(twy)
-
 
 if __name__ == "__main__":
     db_data = []
