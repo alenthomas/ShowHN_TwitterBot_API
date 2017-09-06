@@ -1,16 +1,26 @@
 // controls and rendering
 
-//const postitems = ['first post', 'second post', 'third post']
-const postitems = 'first post'
+const tmpData = [
+  {id: '15173190',
+  title: 'showHn',
+  url: 'http://www.google.co.in'
+  }
+]
 
-const Post = React.createClass({
+const PostItem = React.createClass({
   propTypes: {
-    postItem: React.PropTypes.string.isRequired
+    postTitle: React.PropTypes.string.isRequired,
+    postUrl: React.PropTypes.string.isRequired
   },
 
   render: function() {
     return (
-      React.createElement('p', {className: 'post-item'}, this.props.postItem)
+      React.createElement('div', {className: 'PostItemDiv'},
+        React.createElement('p', {className: 'post-item'},
+          this.props.postTitle),
+        React.createElement('p', {className: 'post-url'},
+          this.props.postUrl)
+      )
     )
   }
 })
@@ -18,7 +28,9 @@ const Post = React.createClass({
 ReactDOM.render(
   React.createElement('div', {className: 'app-div'},
     HeaderElement,
-    React.createElement(Post, {postItem: postitems}),
+    React.createElement(PostItem, {
+      postTitle: tmpData[0].title, postUrl:tmpData[0].url
+    }),
     FooterElement
   ), document.getElementById('react-app')
 )
