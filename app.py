@@ -1,12 +1,29 @@
 import server
+import json
 from content import index_html
+from utils import get_json
+from db import get_stories
+
+DATA = [{'id':'14983268',
+         'title':'Show HN: Shareable reasons to upgrade to Python 3',
+         'url':'http://whypy3.com/'
+}]
+
 def index(request, response):
     return server.send_html_handler(request, response, index_html)
 
+def single_story(request, response):
+    return server.send_json_handler(request, response, data)
+
+def all_stories(request, response):
+    data = get_stories()
+    return server.send_json_handler(request, response, data)
 # server functions
 
 ## add routes
 server.add_route("get", "/", index)
+server.add_route("get", "/1", single_story)
+server.add_route("get", "/all", all_stories)
 
 ## runs server
 server.start_server("0.0.0.0", 8000)
