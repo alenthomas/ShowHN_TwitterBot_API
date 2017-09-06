@@ -7,6 +7,16 @@ const tmpData = [
   }
 ]
 
+function get (url, returnFunction) {
+  const xmlhttp = new XMLHttpRequest()
+  xmlhttp.open("GET", url)
+  xmlhttp.send()
+  xmlhttp.onreadystatechange = function () {
+    if(this.readyState == 4 && this.status == 200)
+      returnFunction(xmlhttp.response)
+  }
+}
+
 const PostItem = React.createClass({
   propTypes: {
     postTitle: React.PropTypes.string.isRequired,
@@ -34,3 +44,8 @@ ReactDOM.render(
     FooterElement
   ), document.getElementById('react-app')
 )
+
+get("/1", function(response) {
+  var jsonResponse = JSON.parse(response)
+  console.log("Ajax :", val)
+})
