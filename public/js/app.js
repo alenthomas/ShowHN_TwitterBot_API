@@ -28,7 +28,7 @@ const PostItem = React.createClass({
       React.createElement('div', {className: 'PostItemDiv'},
         React.createElement('p', {className: 'post-item'},
           this.props.postTitle),
-        React.createElement('p', {className: 'post-url'},
+        React.createElement('a', {className: 'post-url', href:this.props.postUrl},
           this.props.postUrl)
       )
     )
