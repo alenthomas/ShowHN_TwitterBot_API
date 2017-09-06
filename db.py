@@ -9,10 +9,26 @@ def get_ids():
     conn.close()
     return db_data
 
+def get_stories():
+    db_data = []
+    conn = sqlite3.connect("showHN.db")
+    cur = conn.cursor()
+    for row in cur.execute("""SELECT * FROM show_hn"""):
+        db_data.append({"id":row[0], "title": row[1], "url":row[2]})
+    conn.close()
+    return db_data
+
 def insert_id(id_string):
     conn = sqlite3.connect("showHN.db")
     cur = conn.cursor()
     cur.execute("""INSERT INTO show_hn VALUES ({})""".format(id_string))
+    conn.commit()
+    conn.close()
+
+def insert_title_and_url(id_string, title_string, url):
+    conn = sqlite3.connect("showHN.db")
+    cur = conn.cursor()
+    cur.execute("""UPDATE show_hn SET title = ?, url = ? WHERE objectid = ?""", (title_string, url, id_string))
     conn.commit()
     conn.close()
 
