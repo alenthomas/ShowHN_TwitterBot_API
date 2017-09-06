@@ -45,7 +45,27 @@ ReactDOM.render(
   ), document.getElementById('react-app')
 )
 
+const state = tmpData[0]
+
+function setState(shnObj) {
+  const newState = Object.assign({}, state, shnObj)
+  console.log("State :", newState)
+
+  ReactDOM.render(
+    React.createElement('div', {className: 'app-div'},
+      HeaderElement,
+      React.createElement(PostItem, {
+        postTitle: newState.title,
+        postUrl: newState.url
+      }),
+      FooterElement
+    ), document.getElementById('react-app')
+  )
+}
+
+setState(state)
+
 get("/1", function(response) {
   var jsonResponse = JSON.parse(response)
-  console.log("Ajax :", val)
+  console.log("Ajax :", jsonResponse)
 })
