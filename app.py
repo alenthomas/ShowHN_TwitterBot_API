@@ -13,7 +13,7 @@ def index(request, response):
     return server.send_html_handler(request, response, index_html)
 
 def single_story(request, response):
-    return server.send_json_handler(request, response, data)
+    return server.send_json_handler(request, response, DATA)
 
 def all_stories(request, response):
     data = get_stories()
