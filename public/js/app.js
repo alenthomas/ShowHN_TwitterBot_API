@@ -68,4 +68,5 @@ setState(state)
 get("/1", function(response) {
   var jsonResponse = JSON.parse(response)
   console.log("Ajax :", jsonResponse)
+  setState(jsonResponse[0])
 })
