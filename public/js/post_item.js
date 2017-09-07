@@ -8,10 +8,9 @@ const PostItem = React.createClass({
   render: function() {
     return (
       React.createElement('div', {className: 'PostItemDiv'},
-        React.createElement('p', {className: 'post-item'},
-          this.props.title),
-        React.createElement('a', {className: 'post-url', href:this.props.url},
-          this.props.url
+        React.createElement('p', null, this.props.postObj.title),
+        React.createElement('a', {href:this.props.postObj.url},
+          this.props.postObj.url
         )
       )
     )}
