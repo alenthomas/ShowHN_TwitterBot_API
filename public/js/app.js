@@ -43,25 +43,22 @@ const Posts = React.createClass({
     const items = this.props.postItems.map(function(item){
       React.createElement(PostItem, item)
     })
-
     return (
       React.createElement('div', null, items)
     )
   }
 })
 
-const state = tmpData[0]
+const state = tmpData
 
-function setState(shnObj) {
-  const newState = Object.assign({}, state, shnObj)
-  console.log("State :", newState)
+function setState(shnArray) {
+  const newState = state.concat(shnArray)
+//  console.log("State :", newState)
 
   ReactDOM.render(
     React.createElement('div', {className: 'app-div'},
       HeaderElement,
-      React.createElement(PostItem, {
-        postTitle: newState.title,
-        postUrl: newState.url
+      React.createElement(Posts, {postItems: newState
       }),
       FooterElement
     ), document.getElementById('react-app')
@@ -73,5 +70,5 @@ setState(state)
 get("/1", function(response) {
   var jsonResponse = JSON.parse(response)
   console.log("Ajax :", jsonResponse)
-  setState(jsonResponse[0])
+  setState(jsonResponse)
 })
