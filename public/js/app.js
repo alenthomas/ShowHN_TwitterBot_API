@@ -20,14 +20,12 @@ function get (url, returnFunction) {
 const state = tmpData
 
 function setState(shnArray) {
-  const newState = state.concat(shnArray)
-//  console.log("State :", newState)
+  const objState = Object.assign(state, shnArray)
 
   ReactDOM.render(
-    React.createElement('div', {className: 'app-div'},
+    React.createElement('div', null,
       HeaderElement,
-      React.createElement(Posts, {postItems: newState
-      }),
+      React.createElement(Posts, {postIts: objState}),
       FooterElement
     ), document.getElementById('react-app')
   )
