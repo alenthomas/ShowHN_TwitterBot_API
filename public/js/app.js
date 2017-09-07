@@ -19,31 +19,20 @@ function get (url, returnFunction) {
 
 const PostItem = React.createClass({
   propTypes: {
-    postTitle: React.PropTypes.string.isRequired,
-    postUrl: React.PropTypes.string.isRequired
+    postObj: React.propTypes.object.isRequired
   },
 
   render: function() {
     return (
       React.createElement('div', {className: 'PostItemDiv'},
         React.createElement('p', {className: 'post-item'},
-          this.props.postTitle),
-        React.createElement('a', {className: 'post-url', href:this.props.postUrl},
-          this.props.postUrl)
+          this.props.postObj.title),
+        React.createElement('a', {className: 'post-url', href:this.props.postObj.url},
+          this.props.postObj.url
+        )
       )
-    )
-  }
+    )}
 })
-
-ReactDOM.render(
-  React.createElement('div', {className: 'app-div'},
-    HeaderElement,
-    React.createElement(PostItem, {
-      postTitle: tmpData[0].title, postUrl:tmpData[0].url
-    }),
-    FooterElement
-  ), document.getElementById('react-app')
-)
 
 const state = tmpData[0]
 
