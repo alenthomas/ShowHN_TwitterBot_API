@@ -19,7 +19,7 @@ function get (url, returnFunction) {
 
 const PostItem = React.createClass({
   propTypes: {
-    postObj: React.propTypes.object.isRequired
+    postObj: React.PropTypes.object.isRequired
   },
 
   render: function() {
@@ -32,6 +32,22 @@ const PostItem = React.createClass({
         )
       )
     )}
+})
+
+const Posts = React.createClass({
+  propTypes: {
+    postItems: React.PropTypes.array.isRequired
+  },
+
+  render: function () {
+    const items = this.props.postItems.map(function(item){
+      React.createElement(PostItem, item)
+    })
+
+    return (
+      React.createElement('div', null, items)
+    )
+  }
 })
 
 const state = tmpData[0]
