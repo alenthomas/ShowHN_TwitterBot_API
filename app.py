@@ -1,7 +1,6 @@
 import server
 import json
 from content import index_html
-from utils import get_json
 from db import get_stories
 
 DATA = [{'id':'14983268',
@@ -17,7 +16,7 @@ def single_story(request, response):
 
 def all_stories(request, response):
     data = get_stories()
-    return server.send_json_handler(request, response, data)
+    return server.send_json_handler(request, response, data[::-1])
 # server functions
 
 ## add routes
