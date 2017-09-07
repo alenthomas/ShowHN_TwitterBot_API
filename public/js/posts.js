@@ -2,18 +2,20 @@
 
 const Posts = React.createClass({
   propTypes: {
-    postItems: React.PropTypes.array.isRequired
+    postIts: React.PropTypes.object.isRequired
   },
 
   render: function () {
-    const items = this.props.postItems.filter(
-      function(item){
-        if (item.title !== null)
-          return item
-      }).map(
-        function(item){
-          return React.createElement(PostItem, {postObj:item})
-        })
+    const thatIts = this.props.postIts
+    const items = function() {
+      const arr = []
+      for(i in thatIts) {
+        if(thatIts[i].title !== null)
+          arr.push(
+            React.createElement(PostItem, {postObj:thatIts[i]})
+          )}
+    return arr
+    }()
 
     return (
       React.createElement('div', {className: 'PostDiv'}, items)
