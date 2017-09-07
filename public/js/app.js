@@ -1,9 +1,9 @@
 // controls and rendering
 
 const tmpData = [
-  {id: '15173190',
-  title: 'showHn',
-  url: 'http://www.google.co.in'
+  {id: null,
+  title: null,
+  url: null
   }
 ]
 
@@ -40,11 +40,11 @@ const Posts = React.createClass({
   },
 
   render: function () {
-    const items = this.props.postItems.map(function(item){
-      return React.createElement(PostItem, item)
-    })
+    const items = this.props.postItems
+      .filter(function(item){if (item.title) {return item}})
+      .map(function(item){return React.createElement(PostItem, item)})
     return (
-      React.createElement('div', null, items)
+      React.createElement('div', {className: 'PostDiv'}, items)
     )
   }
 })
@@ -67,7 +67,7 @@ function setState(shnArray) {
 
 setState(state)
 
-get("/1", function(response) {
+get("/all", function(response) {
   var jsonResponse = JSON.parse(response)
   console.log("Ajax :", jsonResponse)
   setState(jsonResponse)
