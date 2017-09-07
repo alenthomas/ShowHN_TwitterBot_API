@@ -17,38 +17,6 @@ function get (url, returnFunction) {
   }
 }
 
-const PostItem = React.createClass({
-  propTypes: {
-    postObj: React.PropTypes.object.isRequired
-  },
-
-  render: function() {
-    return (
-      React.createElement('div', {className: 'PostItemDiv'},
-        React.createElement('p', {className: 'post-item'},
-          this.props.title),
-        React.createElement('a', {className: 'post-url', href:this.props.url},
-          this.props.url
-        )
-      )
-    )}
-})
-
-const Posts = React.createClass({
-  propTypes: {
-    postItems: React.PropTypes.array.isRequired
-  },
-
-  render: function () {
-    const items = this.props.postItems
-      .filter(function(item){if (item.title) {return item}})
-      .map(function(item){return React.createElement(PostItem, item)})
-    return (
-      React.createElement('div', {className: 'PostDiv'}, items)
-    )
-  }
-})
-
 const state = tmpData
 
 function setState(shnArray) {
@@ -67,11 +35,15 @@ function setState(shnArray) {
 
 setState(state)
 
+get("/all", function(response){
+  var jsonResponse = JSON.parse(response)
+  setState(jsonResponse)
+})
 
 setInterval(function() {
   get("/all", function(response) {
     var jsonResponse = JSON.parse(response)
-    console.log("Ajax :", jsonResponse)
+    console.log("Ajax with interval:", jsonResponse)
     setState(jsonResponse)
   })
 }, 1000*60*1)
