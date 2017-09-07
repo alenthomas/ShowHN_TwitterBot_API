@@ -26,9 +26,9 @@ const PostItem = React.createClass({
     return (
       React.createElement('div', {className: 'PostItemDiv'},
         React.createElement('p', {className: 'post-item'},
-          this.props.postObj.title),
-        React.createElement('a', {className: 'post-url', href:this.props.postObj.url},
-          this.props.postObj.url
+          this.props.title),
+        React.createElement('a', {className: 'post-url', href:this.props.url},
+          this.props.url
         )
       )
     )}
@@ -41,7 +41,7 @@ const Posts = React.createClass({
 
   render: function () {
     const items = this.props.postItems.map(function(item){
-      React.createElement(PostItem, item)
+      return React.createElement(PostItem, item)
     })
     return (
       React.createElement('div', null, items)
