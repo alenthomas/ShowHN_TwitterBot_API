@@ -67,8 +67,11 @@ function setState(shnArray) {
 
 setState(state)
 
-get("/all", function(response) {
-  var jsonResponse = JSON.parse(response)
-  console.log("Ajax :", jsonResponse)
-  setState(jsonResponse)
-})
+
+setInterval(function() {
+  get("/all", function(response) {
+    var jsonResponse = JSON.parse(response)
+    console.log("Ajax :", jsonResponse)
+    setState(jsonResponse)
+  })
+}, 1000*60*1)
