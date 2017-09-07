@@ -1,6 +1,5 @@
 div.app-div {
     width: 100%;
-    border: 1px solid gray;
 }
 
 header {
@@ -9,6 +8,8 @@ header {
     background-color: #ea6627;
     clear: left;
     text-align: center;
+    font-family: 'Raleway', sans-serif;
+    border-radius: 5px;
 }
 
 footer {
@@ -21,6 +22,8 @@ footer {
     right: 0;
     bottom: 0;
     left: 0;
+    font-family: 'Raleway', sans-serif;
+    border-radius: 5px;
 }
 .copy-left {
     display: inline-block;
@@ -42,30 +45,11 @@ footer {
 }
 
 .PostItemDiv {
+    font-family: 'Raleway', sans-serif;
     padding: 1em;
     background-color: #d8d2d2;
     margin: 1em;
+    word-wrap: break-word;
+    border-radius: 5px;
+    box-shadow: 7px 5px 20px #888888;
 }
-nav {
-    float: left;
-    max-width: 160px;
-    margin: 0;
-    padding: 1em;
-}
-
-nav ul {
-    list-style-type: none;
-    padding: 0;
-}
-   
-nav ul a {
-    text-decoration: none;
-}
-
-posts {
-    margin-left: 170px;
-    border-left: 1px solid gray;
-    padding: 1em;
-    overflow: hidden;
-}
-

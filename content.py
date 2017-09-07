@@ -4,6 +4,7 @@ index_html = """
   <head>
     <meta charset="UTF-8">
     <title>Index Page for React App!</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:500&amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/index.css"
   </head>
   <body>
