@@ -52,7 +52,7 @@ def get_items_and_post(db_data=[]):
     try:
         for item in data:
             if item["objectID"] not in db_data:
-                #tweet_now(item)
+                tweet_now(item)
                 print(item["objectID"], item["title"], item["url"], item["created_at_i"])
                 insert_row(item["objectID"], item["title"], item["url"], item["created_at_i"])
     except KeyError:
