@@ -9,6 +9,15 @@ def get_ids():
     conn.close()
     return db_data
 
+def get_stories():
+    db_data = []
+    conn = sqlite3.connect("showHN.db")
+    cur = conn.cursor()
+    for row in cur.execute("""SELECT * FROM show_hn"""):
+        db_data.append({"id":row[0], "title": row[1], "url":row[2]})
+    conn.close()
+    return db_data
+
 def insert_row(id_string, title, url, timestamp):
     conn = sqlite3.connect("showHN.db")
     cur = conn.cursor()
