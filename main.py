@@ -7,7 +7,7 @@ from twython import Twython
 from twython.exceptions import TwythonError
 
 from secrets import API_KEY, API_SECRET, ACCESS_SECRET, ACCESS_TOKEN
-from db import get_ids, insert_id, create_table_show_hn, write_logs
+from db import get_ids, insert_row, create_table_show_hn, write_logs
 
 showhn_api = "http://hn.algolia.com/api/v1/search?tags=show_hn&numericFilters=points%3E25,created_at_i%3E{}&page={}"
 
@@ -52,8 +52,9 @@ def get_items_and_post(db_data=[]):
     try:
         for item in data:
             if item["objectID"] not in db_data:
-                tweet_now(item)
-                insert_id(str(item["objectID"]))
+                #tweet_now(item)
+                print(item["objectID"], item["title"], item["url"], item["created_at_i"])
+                insert_row(item["objectID"], item["title"], item["url"], item["created_at_i"])
     except KeyError:
         write_logs(error)
     except TwythonError as twy:
