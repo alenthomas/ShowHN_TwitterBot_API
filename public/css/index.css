@@ -1,0 +1,51 @@
+header {
+    padding: 1em;
+    color: white;
+    background-color: #ea6627;
+    clear: left;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    border-radius: 5px;
+}
+
+footer {
+    padding: 1em;
+    color: #190d0d;
+    background-color: #5fc734;
+    clear: left;
+    text-align: center;
+    position: relative;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font-family: 'Raleway', sans-serif;
+    border-radius: 5px;
+}
+.copy-left {
+    display: inline-block;
+    text-align: right;
+    margin: 0px;
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: “FlipH”;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.PostDiv {
+    padding: 1em;
+    background-color: white;
+}
+
+.PostItemDiv {
+    font-family: 'Raleway', sans-serif;
+    padding: 1em;
+    background-color: #d8d2d2;
+    margin: 1em;
+    word-wrap: break-word;
+    border-radius: 5px;
+    box-shadow: 7px 5px 20px #888888;
+}
