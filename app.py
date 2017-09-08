@@ -5,7 +5,8 @@ from db import get_stories
 
 DATA = [{'id':'14983268',
          'title':'Show HN: Shareable reasons to upgrade to Python 3',
-         'url':'http://whypy3.com/'
+         'url':'http://whypy3.com/',
+         'time': '1502393622'
 }]
 
 def index(request, response):
