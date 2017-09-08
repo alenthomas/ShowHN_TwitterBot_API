@@ -14,7 +14,7 @@ def get_stories():
     conn = sqlite3.connect("showHN.db")
     cur = conn.cursor()
     for row in cur.execute("""SELECT * FROM show_hn"""):
-        db_data.append({"id":row[0], "title": row[1], "url":row[2]})
+        db_data.append({"id":row[0], "title": row[1], "url":row[2], "time": row[3]})
     conn.close()
     return db_data
 
